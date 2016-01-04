@@ -124,7 +124,6 @@
 							<ul class="sub-menu">
 							<?php if($group_id == 2 || $group_id==1){  ?>
 								<li>
-								<center><span class="badge badge-new">new</span></center>
 								<?php echo $this->Html->link(__d('admin', '<span class="title">INTERNAL REQUEST</span>'), array('controller' => 'Internal_requests', 'action' => 'add',$idUsr,$department_id),array('escape'=>false)); ?>
                                     
 								</li>

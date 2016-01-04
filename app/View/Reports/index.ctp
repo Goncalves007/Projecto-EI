@@ -177,7 +177,7 @@ if($group_id==2){
             $controller = 'externalRequests';
          }
         ?>
-           <td><?php echo $this->Html->link('View Details', array('controller' =>$controller, 'action' => 'view', $Reports[$i]['id'],$Reports[$i]['department_id']));?></td>
+           <td><?php echo $this->Html->link('View Details', array('controller' =>$controller, 'action' => 'view', $Reports[$i]['id'],$Reports[$i]['department_id']),array('class' => 'btn btn-light-grey btn-xs'));?></td>
          
     </tr>
     <?php  } ?>

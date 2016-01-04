@@ -23,8 +23,10 @@ if($head==2){
               </div>
               <div class="col-sm-6">
                 <p>
-                  <?php echo __($internalRequest['InternalRequest']['reference_application']); ?><span> Data vem aqui </span>
+                  <?php echo __($internalRequest['InternalRequest']['reference_application']); ?>
+                  <span> <?php echo __($internalRequest['InternalRequest']['created']); ?> </span>
                 </p>
+                <strong> Payment details : </strong><span style="color:#606060"><em><?php echo h($internalRequest['InternalRequest']['payment_details']); ?></em></span>
               </div>
             </div>
             <hr>
@@ -43,16 +45,22 @@ if($head==2){
                   <br>
                     <?php echo h($internalRequest['User']['email']); ?>
                   </address>
+                  <hr>
+                  <address>
+                  <strong><?php echo __('Beneficiary Name :'); ?></strong>
+                  <br>
+                    <?php echo h($internalRequest['InternalRequest']['name']); ?>
+                  </address>
                   <address>
                     <?php
                       if ($head==2) {?>
                           <div class="form-group">
-                      <strong><?php echo $this->Html->link('My Requests', array('controller' => 'reports', 'action' => 'index', $internalRequest['User']['id'], $internalRequest['User']['department_id'])); ?></strong>
+                      <strong><?php echo $this->Html->link('My Requests', array('controller' => 'reports', 'action' => 'index', $internalRequest['User']['id'], $internalRequest['User']['department_id']),array('class' => 'btn btn-light-grey btn-xs')); ?></strong>
                       </div>
                       <?php
                       }elseif ($head!=2) {?>
                           <div class="form-group">
-                      <strong><?php echo $this->Html->link('Last Applicant Requests', array('controller' => 'reports', 'action' => 'index', $internalRequest['User']['id'], $internalRequest['User']['department_id'])); ?></strong>
+                      <strong><?php echo $this->Html->link('Last Applicant Requests', array('controller' => 'reports', 'action' => 'index', $internalRequest['User']['id'], $internalRequest['User']['department_id']),array('class' => 'btn btn-light-grey btn-xs')); ?></strong>
                       </div>
                       <?php
                       }
@@ -251,7 +259,6 @@ if($head==2){
                       <th class="hidden-480"> Department </th>
                       <th class="hidden-480"> Beneficiary </th>
                       <th class="hidden-480"> Provider </th>
-                      <th class="hidden-480"> Item </th>
                       <th class="hidden-480"> Amount </th>
                       <th class="hidden-480"> Currency </th>
                       <th class="hidden-480"> File </th>
@@ -264,13 +271,12 @@ if($head==2){
                       <td class="hidden-480"> <?php echo h($internalRequest['Department']['label']); ?> </td>
                       <td class="hidden-480"> <?php echo h($internalRequest['Beneficiary']['name']); ?> </td>
                       <td class="hidden-480"> <?php echo h($internalRequest['Provider']['name']); ?> </td>
-                      <td class="hidden-480"> <?php echo h($internalRequest['InternalRequest']['payment_details']); ?> </td>
                       <td class="hidden-480"> <?php echo h($internalRequest['InternalRequest']['amount']); ?> </td>
                       <td class="hidden-480"> <?php echo h($internalRequest['Currency']['label']); ?> </td>
                       <td><?php if (!empty($internalRequest['Report']) ) {?>
    <div class="form-group">
-   <?php echo $this->Html->link('Download', array('controller' => 'reports', 'action' => 'viewdown', $internalRequest['Report'][0]['id']));?>
-   <?php echo $this->Html->link('Gerar PDF', array('action' => 'pdf', $internalRequest['Report'][0]['id']));?>
+   <?php echo $this->Html->link('<i class="fa fa-download"></i>', array('controller' => 'reports', 'action' => 'viewdown', $internalRequest['Report'][0]['id']), array('class' => 'btn btn-green btn-xs','escape'=>false));?>
+   <?php echo $this->Html->link('<i class="fa clip-file-pdf"></i>', array('action' => 'pdf', $internalRequest['Report'][0]['id']), array('class' => 'btn btn-dark-grey btn-xs','escape'=>false));?>
 </div>
 <?php }elseif (empty($internalRequest['Report'])) {?>
     <em style="color:#800000"><b>Nenhum Ficheiro anexado.</b></em>
