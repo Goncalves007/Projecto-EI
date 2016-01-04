@@ -51,9 +51,6 @@ switch ($group_id) {
                 <div class="content">
                   Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
                 </div>
-                <a class="view-more" href="#">
-                  View More <i class="clip-arrow-right-2"></i>
-                </a>
               </div>
             </div>
 <?php }elseif ($who == 'Head_Department') {?>
