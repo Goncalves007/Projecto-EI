@@ -46,10 +46,10 @@ switch ($group_id) {
               <div class="core-box">
                 <div class="heading">
                   <i class="clip-user-4 circle-icon circle-green"></i>
-                  <h2>Applicant</h2>
+                  <h2>Requisitor</h2>
                 </div>
                 <div class="content">
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+                  O M&oacute;dulo para a <b>Requisi&ccedil;&atilde;o de Fundo</b> permite-lhe, n&atilde;o apenas fazer sua requisi&ccedil;&otilde;es como tab&eacute;m  monitora-las, em tempo real, desde ao nivel departamental at&eacute; ao fim do ciclo de requisi&ccedil;&atilde;o a trav&eacute;s de sistema de alerta.
                 </div>
               </div>
             </div>
