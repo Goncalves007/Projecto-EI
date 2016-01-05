@@ -28,6 +28,7 @@ if($head==2){
                 </p>
                 <strong> Payment details : </strong><span style="color:#606060"><em><?php echo h($internalRequest['InternalRequest']['payment_details']); ?></em></span>
               </div>
+              
             </div>
             <hr>
             <div class="row">
@@ -90,6 +91,13 @@ if($head==2){
                                <div class="tab-pane fade in active" id="home">
                                <?php foreach ($Budgets as $budget): ?>
                                     <h4>Available Budget</h4>
+                                    <?php
+                                         if (isset($sms)) {
+                                           echo "<em style='color:red'>$sms</em>";
+                                         }else{
+                                          $sms="";
+                                         }
+                                     ?>
                                     <p>
                                       <div class="panel panel-primary text-center no-boder">
                                 <div class="panel-body green">

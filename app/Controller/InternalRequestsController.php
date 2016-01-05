@@ -75,7 +75,7 @@ class InternalRequestsController extends AppController {
  * @param string $id
  * @return void
  */
-	public function view($id = null, $idDep = null) {
+	public function view($id = null, $idDep = null, $sms = null) {
 		if (!$this->InternalRequest->exists($id)) {
 			throw new NotFoundException(__('Invalid internal request'));
 		}
@@ -96,6 +96,7 @@ class InternalRequestsController extends AppController {
        
         $this->set('Budgets', $Budgets);
         $this->set('alert', $alert);
+        $this->set(compact('sms'));
 	}
 
 /**
@@ -173,12 +174,15 @@ class InternalRequestsController extends AppController {
 			throw new NotFoundException(__('Invalid external request'));
 		}else{
          if($sts == 1){
-         $new_budget = ($budget - $request_amount);  
+          if ($request_amount < $budget) {
+            $new_budget = ($budget - $request_amount);
+          }
          }elseif($sts == 0){
          	$new_budget = $sts;
          }
 
-		if ($this->request->is('get')) {	
+		if ($this->request->is('get')) {
+        if ($new_budget) {
 	        $this->InternalRequest->read(null, $id);
 			$this->InternalRequest->set('request_status', $request_status);
 			$this->InternalRequest->save();
@@ -219,7 +223,11 @@ class InternalRequestsController extends AppController {
 
 		return $this->redirect(array('controller' => 'reports', 'action' => 'all'));
 			}
+           }elseif (!$new_budget) {
+             $sms = 'Budget indisponivel para a operacao!';
+             return $this->redirect(array('controller' => 'InternalRequests', 'action' => 'view',$id,$idDep,$sms));
            }
+          }
 		}
 		
 	}

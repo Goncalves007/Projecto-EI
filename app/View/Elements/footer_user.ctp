@@ -49,12 +49,6 @@ switch ($department_id) {
                         <i class="fa fa-folder-open"></i><b>Welcome Back </b>
                         <br>
                         <i class="fa fa-folder-open"></i><b>&nbsp;User logged in : </b><em><?php echo $username ?></em>
-                        <?php
-                        if ($departmant_head == 1 AND $group_id == 6) { ?>
-                        <b> As <?php echo $department_name ?></b> <em>Head Department</em>  
-                       <?php  }elseif ($group_id == 9 || $group_id == 8 || $group_id == 7) {?>
-                           <b> As <em><?php echo $forwarding_Agent_Name ?></em></b>  
-                       <?php }?>
                     </div>
                 </center>    
                 </div>
