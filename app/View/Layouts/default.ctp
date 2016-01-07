@@ -87,11 +87,11 @@
 					</button>
 					<!-- end: RESPONSIVE MENU TOGGLER -->
 					<!-- start: LOGO -->
-					<a class="navbar-brand" href="index.html">
+						<a class="navbar-brand" href="index.html">
 						CLIP<i class="clip-clip"></i>ONE
 					</a>
 					<!-- end: LOGO -->
-				</div>
+				</div> 
 				
 			</div>
 			<!-- end: TOP NAVIGATION CONTAINER -->
@@ -179,14 +179,14 @@
 											</li>
 							<?php }elseif($group_id == 11){?>
 							            <li>
-                                           <?php echo $this->Html->link(__d('admin', '<span class="title">PESQUIZA AVANCADA</span>'), array('controller' => 'clients', 'action' => 'search'),array('escape'=>false)); ?>
+                                           <?php echo $this->Html->link(__d('admin', '<span class="title">PESQUISA AVANCADA</span>'), array('controller' => 'clients', 'action' => 'search'),array('escape'=>false)); ?>
 										</li>
 										<li>
                                            <?php echo $this->Html->link(__d('admin', '<span class="title">CONTROL</span>'), array('controller' => 'clients', 'action' => 'notification'),array('escape'=>false)); ?>
 										</li>
 							<?php }elseif($group_id == 12){ ?>
                                         <li>
-                                           <?php echo $this->Html->link(__d('admin', '<span class="title">PESQUIZA AVANCADA</span>'), array('controller' => 'alertContrats', 'action' => 'view'),array('escape'=>false)); ?>
+                                           <?php echo $this->Html->link(__d('admin', '<span class="title">PESQUISA AVANCADA</span>'), array('controller' => 'alertContrats', 'action' => 'view'),array('escape'=>false)); ?>
 										</li>
 							<?php }elseif ($group_id == 6 ) {?>
 							    <li>
@@ -373,7 +373,7 @@
 											<?php echo $this->Html->link(__d('admin', '<span class="badge badge-new">REQUISCAO TERMINADA</span>'), array('controller' => 'reports', 'action' => 'finished', $idUsr, $department_id),array('escape'=>false)); ?>
 							                </li>
 							                <li>
-											<?php echo $this->Html->link(__d('admin', '<span class="badge badge-new">REQUISCAO REJEITADA</span>'), array('controller' => 'reports', 'action' => 'rejected', $idUsr, $department_id),array('escape'=>false)); ?>
+											<?php echo $this->Html->link(__d('admin', '<span class="badge badge-new">REQUISICAO REJEITADA</span>'), array('controller' => 'reports', 'action' => 'rejected', $idUsr, $department_id),array('escape'=>false)); ?>
 							                </li>   
 											<li>
 											<?php echo $this->Html->link(__d('admin', '<span class="badge badge-new">TODAS REQUISICOES</span>'), array('controller' => 'reports', 'action' => 'index', $idUsr, $department_id),array('escape'=>false)); ?>

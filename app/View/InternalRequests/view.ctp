@@ -172,7 +172,7 @@ if($head==2){
                                         <em>Requisicao Paga</em>
                                       </a>
                                       <?php }elseif ($internalRequest['InternalRequest']['request_status'] ==3) {?>
-                                       <a class="btn btn-teal show-tab">
+                                       <a class="btn btn-light-grey btn-xs">
                                         <em>Aguarda Tesoreiro</em>
                                       </a>
                                      <?php }
