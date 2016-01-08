@@ -23,6 +23,7 @@ if($head==2){
                 <p>
                   <?php echo __($externalRequest['ExternalRequest']['reference_application']); ?><span> <?php echo h($externalRequest['ExternalRequest']['created']); ?> </span>
                 </p>
+                <strong> Payment details : </strong><span style="color:#606060"><em><?php echo h($externalRequest['ExternalRequest']['payment_details']); ?></em></span>
               </div>
             </div>
             <hr>
@@ -33,7 +34,9 @@ if($head==2){
                   <address>
                    <strong><?php echo __('Proposal Value :'); ?></strong>
                     <br>
-                     <?php echo h($Proformas[0]['proposal_value']); ?>
+                     <?php
+                     $Proformas_format_number = number_format($Proformas[0]['proposal_value'], 2, ',', ' ');
+                      echo h($Proformas_format_number); ?>
                   </address>
                   <address>
                   <strong><?php echo __('Proposal Invoice Number :'); ?></strong>
@@ -60,12 +63,12 @@ if($head==2){
                     <?php
                       if ($head==2) {?>
                           <div class="form-group">
-                      <strong><?php echo $this->Html->link('My Requests', array('controller' => 'reports', 'action' => 'index', $externalRequest['User']['id'], $externalRequest['User']['department_id'])); ?></strong>
+                      <strong><?php echo $this->Html->link('My Requests', array('controller' => 'reports', 'action' => 'index', $externalRequest['User']['id'], $externalRequest['User']['department_id']),array('class' => 'btn btn-light-grey btn-xs')); ?></strong>
                       </div>
                       <?php
                       }elseif ($head!=2) {?>
                           <div class="form-group">
-                      <strong><?php echo $this->Html->link('Last Applicant Requests', array('controller' => 'reports', 'action' => 'index', $externalRequest['User']['id'], $externalRequest['User']['department_id'])); ?></strong>
+                      <strong><?php echo $this->Html->link('Last Applicant Requests', array('controller' => 'reports', 'action' => 'index', $externalRequest['User']['id'], $externalRequest['User']['department_id']),array('class' => 'btn btn-light-grey btn-xs')); ?></strong>
                       </div>
                       <?php
                       }
@@ -107,7 +110,9 @@ if($head==2){
                                       <div class="panel panel-primary text-center no-boder">
                                 <div class="panel-body green">
                                     <i class="fa fa fa-floppy-o fa-3x"></i>
-                                    <h3><?php echo $budget['Budget']['budget'] ?> MZN</h3>
+                                    <h3><?php
+                                    $budget_format_number = number_format($budget['Budget']['budget'], 2, ',', ' ');
+                                     echo $budget_format_number ?> MZN</h3>
                                 </div>
                                 <div class="panel-footer">
                                 <span class="panel-eyecandy-title">
@@ -146,7 +151,7 @@ if($head==2){
                                        <div class="form-group">
                                         <?php echo $this->Html->link('Accept Request', array('action' => 'Endorsement',$externalRequest['ExternalRequest']['id'],1,$externalRequest['ExternalRequest']['department_id'],$externalRequest['ExternalRequest']['reference_application'],$Budgets[0]['Budget']['id'],$Budgets[0]['Budget']['budget'],$externalRequest['ExternalRequest']['amount'],1,$externalRequest['User']['email']),array('class' => 'btn btn-default'));?>
                                         </div>
-                                       <?php }elseif ($externalRequest['ExternalRequest']['request_status'] ==1) { ?><a class="btn btn-teal show-tab"> 
+                                       <?php }elseif ($externalRequest['ExternalRequest']['request_status'] ==1) { ?><a class="btn btn-light-grey btn-xs"> 
                                        <em>Aguardando o Ger. Financeiro ...</em>
                                       <?php }elseif ($externalRequest['ExternalRequest']['request_status'] ==5) { ?>
                                       <a class="btn btn-teal show-tab">
@@ -176,7 +181,7 @@ if($head==2){
                                         <?php echo $this->Html->link('Accept Request', array('action' => 'Endorsement',$externalRequest['ExternalRequest']['id'],3,$externalRequest['ExternalRequest']['department_id'],$externalRequest['ExternalRequest']['reference_application'],$Budgets[0]['Budget']['id'],$Budgets[0]['Budget']['budget'],$externalRequest['ExternalRequest']['amount'],1,$externalRequest['User']['email']),array('class' => 'btn btn-default'));?>
                                         </div>
                                       <?php }elseif ($externalRequest['ExternalRequest']['request_status'] ==0) { ?> 
-                                      <a class="btn btn-teal show-tab">
+                                      <a class="btn btn-light-grey btn-xs">
                                        <em>Aguardando Ch. Departamento ...</em>
                                        </a>
                                       <?php }elseif ($externalRequest['ExternalRequest']['request_status'] ==5) { ?>
@@ -207,11 +212,11 @@ if($head==2){
                                         <?php echo $this->Html->link('Resource available', array('action' => 'Endorsement',$externalRequest['ExternalRequest']['id'],5,$externalRequest['ExternalRequest']['department_id'],$externalRequest['ExternalRequest']['reference_application'],$Budgets[0]['Budget']['id'],$Budgets[0]['Budget']['budget'],$externalRequest['ExternalRequest']['amount'],1,$externalRequest['User']['email']),array('class' => 'btn btn-default'));?>
                                         </div>
                                       <?php }elseif ($externalRequest['ExternalRequest']['request_status'] ==0) { ?>
-                                      <a class="btn btn-teal show-tab">
+                                      <a class="btn btn-light-grey btn-xs">
                                         <em>Aguardando o Chef. Departamento ...</em>
                                         </a>
                                       <?php }elseif ($externalRequest['ExternalRequest']['request_status'] ==1) { ?> 
-                                      <a class="btn btn-teal show-tab">
+                                      <a class="btn btn-light-grey btn-xs">
                                        <em>Aguardando o Ger. Financeiro ...</em>
                                        </a>
                                       <?php }elseif ($externalRequest['ExternalRequest']['request_status'] ==5) { ?>
@@ -245,15 +250,15 @@ if($head==2){
                                         <?php echo $this->Html->link('Pay Request', array('action' => 'Endorsement',$externalRequest['ExternalRequest']['id'],9,$externalRequest['ExternalRequest']['department_id'],$externalRequest['ExternalRequest']['reference_application'],$Budgets[0]['Budget']['id'],$Budgets[0]['Budget']['budget'],$externalRequest['ExternalRequest']['amount'],1,$externalRequest['User']['email']),array('class' => 'btn btn-default'));?>
                                         </div>
                                       <?php }elseif ($externalRequest['ExternalRequest']['request_status'] ==0) { ?>
-                                      <a class="btn btn-teal show-tab">
+                                      <a class="btn btn-light-grey btn-xs">
                                         <em>Aguardando o Chef. Departamento ...</em>
                                         </a>
                                       <?php }elseif ($externalRequest['ExternalRequest']['request_status'] ==1) { ?>
-                                      <a class="btn btn-teal show-tab">
+                                      <a class="btn btn-light-grey btn-xs">
                                        <em>Aguardando o Ger. Financeiro ...</em>
                                        </a>
                                       <?php }elseif ($externalRequest['ExternalRequest']['request_status'] ==3) { ?>
-                                      <a class="btn btn-teal show-tab">
+                                      <a class="btn btn-light-grey btn-xs">
                                         <em>Aguardando a Tesoraria ...</em>
                                         </a>
                                       <?php }elseif ($externalRequest['ExternalRequest']['request_status'] ==7) { ?>
@@ -307,7 +312,6 @@ if($head==2){
                       <th class="hidden-480"> Department </th>
                       <th class="hidden-480"> Beneficiary </th>
                       <th class="hidden-480"> Provider </th>
-                      <th class="hidden-480"> Item </th>
                       <th class="hidden-480"> Amount </th>
                       <th class="hidden-480"> Currency </th>
                       <th class="hidden-480"> File</th>
@@ -320,13 +324,14 @@ if($head==2){
                       <td class="hidden-480"> <?php echo h($externalRequest['Department']['label']); ?> </td>
                       <td class="hidden-480"> <?php echo h($externalRequest['ExternalBeneficiary']['name']); ?> </td>
                       <td class="hidden-480"> <?php echo h($externalRequest['Provider']['name']); ?> </td>
-                      <td class="hidden-480"> <?php echo h($externalRequest['ExternalRequest']['payment_details']); ?> </td>
-                      <td class="hidden-480"> <?php echo h($externalRequest['ExternalRequest']['amount']); ?> </td>
+                      <td class="hidden-480"> <?php 
+                      $amount_format_number = number_format($externalRequest['ExternalRequest']['amount'], 2, ',', ' ');
+                      echo $amount_format_number; ?> </td>
                       <td class="hidden-480"> <?php echo h($externalRequest['Currency']['label']); ?> </td>
                       <td><?php if (!empty($externalRequest['Report']) ) {?>
    <div class="form-group">
-   <?php echo $this->Html->link('Download', array('controller' => 'reports', 'action' => 'viewdown', $externalRequest['Report'][0]['id']));?>
-   <?php echo $this->Html->link('Gerar PDF', array('action' => 'pdf', $externalRequest['Report'][0]['id']));?>
+   <?php echo $this->Html->link('<i class="fa fa-download"></i>', array('controller' => 'reports', 'action' => 'viewdown', $externalRequest['Report'][0]['id']), array('class' => 'btn btn-green btn-xs','escape'=>false));?>
+   <?php echo $this->Html->link('<i class="fa clip-file-pdf"></i>', array('action' => 'pdf', $externalRequest['Report'][0]['id']), array('class' => 'btn btn-dark-grey btn-xs','escape'=>false));?>
 </div>
 <?php }elseif (empty($externalRequest['Report'])) {?>
     <em style="color:#800000"><b>Nenhum Ficheiro anexado.</b></em>

@@ -436,7 +436,7 @@ $this->set('pro',$pro);
  * @param string $id
  * @return void
  */
-	public function view($id = null, $idDep = null) {
+	public function view($id = null, $idDep = null, $sms = null) {
 		if (!$this->ExternalRequest->exists($id)) {
 			throw new NotFoundException(__('Invalid external request'));
 		}
@@ -470,6 +470,7 @@ $this->set('pro',$pro);
 		 $this->set('Budgets', $Budgets);
 		 $this->set('Endorsos', $Endorsos);
      $this->set('var', $pdfvalues);
+     $this->set(compact('sms'));
 	}
 
 /**
@@ -546,53 +547,61 @@ $this->set('pro',$pro);
 			throw new NotFoundException(__('Invalid external request'));
 		}
 		else{
-        if($sts == 1){
-         $new_budget = ($budget - $request_amount);  
+        if($sts == 1){ 
+          if ($request_amount < $budget) {
+            $new_budget = ($budget - $request_amount);
+          } 
          }elseif($sts == 0){
          	$actual_budget = $sts;
          }
 
 		if ($this->request->is('get')) {	
+      if ($new_budget) {
 	        $this->ExternalRequest->read(null, $id);
 			$this->ExternalRequest->set('request_status', $request_status);
 			$this->ExternalRequest->save();
          if ($request_status==1 || $request_status==2) {
         	if ($request_status==1) {
                	$text = "Foi Deferida, Pelo Chefe de Departmento, a Requisicao com a Referencia: $refReq ";
-               	$this->email($text, $correios);
+               	//$this->email($text, $correios);
                }elseif ($request_status==2) {
                	$text = "Foi Indeferida, Pelo Chefe de Departmento, a Requisicao com Referencia: $refReq ";
-               	$this->email($text, $correios);
+               	//$this->email($text, $correios);
                }
 			return $this->redirect(array('controller' => 'endorsements', 'action' => 'view',$idDep)); 	
 
 			} elseif($request_status==3 || $request_status==4 || $request_status==5 || $request_status==6 || $request_status==7 || $request_status==8 || $request_status==9) {
 				if ($request_status==3) {
 	               	$text = "Foi Deferida, Pelo Gerente Financeito, a Requisicao com a Referencia: $refReq ";
-	               	$this->email($text, $correios);
+	               	//$this->email($text, $correios);
 	              }elseif ($request_status==4) {
 	               	$text = "Foi Indeferida, Pelo Gerente Financeiro, a Requisicao com Referencia: $refReq ";
-	               	$this->email($text, $correios);
+	               	//$this->email($text, $correios);
                }elseif ($request_status==5) {
                		$text = "<b>Tesoraria: </b> Ha disponibilidade de Fundo Para a Requisicao com a Referencia: $refReq ";
-	               	$this->email($text, $correios);
+	               	//$this->email($text, $correios);
 	               	return $this->redirect(array('controller' => 'budgets', 'action' => 'update_budget',$id_budget, $new_budget, $idDep, $id, $refReq));
                }elseif ($request_status==6) {
                		$text = "<b>Tesoraria: </b>Nao Ha disponibilidade de Fundo Para a Requisicao com a Referencia: $refReq ";
-	               	$this->email($text, $correios);
+	               	//$this->email($text, $correios);
                }elseif ($request_status==7) {
                		$text = "<b>Administracao: </b> Foi Submetida a Requisicao com a Referencia: $refReq ";
-	               	$this->email($text, $correios);
+	               	//$this->email($text, $correios);
                }elseif ($request_status==8) {
                		$text = "Por Programar";
-	               	$this->email($text, $correios);
+	               	//$this->email($text, $correios);
                }elseif ($request_status==9) {
                		$text = "<b>Administracao: </b> Foi Paga a Requisicao com a Referencia: $refReq ";
-	               $this->email($text, $correios);
+	               //$this->email($text, $correios);
                }
 
 		return $this->redirect(array('controller' => 'reports', 'action' => 'all'));
 			}
+        }elseif (!$new_budget) {
+             $sms = 'Budget indisponivel para essa operacao!';
+             return $this->redirect(array('controller' => 'ExternalRequests', 'action' => 'view',$id,$idDep,$sms));
+           }
+
            }
 		}
 		

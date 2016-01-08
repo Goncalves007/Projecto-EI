@@ -31,7 +31,7 @@ class InternalRequest extends AppModel {
  */
    public $validate = array(
   	'amount' => array(
-  		'rule' => '/([0-9]{2,8})$/',
+  		'rule' => '/([1-9]{2,10})$/',
         'message' => '(Formato valido: xxxxxx) Ex. 100000',
         'allowEmpty' => false
     ),

@@ -102,7 +102,9 @@ if($head==2){
                                       <div class="panel panel-primary text-center no-boder">
                                 <div class="panel-body green">
                                     <i class="fa fa fa-floppy-o fa-3x"></i>
-                                    <h3><?php echo $budget['Budget']['budget'] ?> MZN</h3>
+                                    <h3><?php
+                                    $budget_format_number = number_format($budget['Budget']['budget'], 2, ',', ' ');
+                                     echo $budget_format_number ?> MZN</h3>
                                 </div>
                                 <div class="panel-footer">
                                 <span class="panel-eyecandy-title">
@@ -172,7 +174,7 @@ if($head==2){
                                         <em>Requisicao Paga</em>
                                       </a>
                                       <?php }elseif ($internalRequest['InternalRequest']['request_status'] ==3) {?>
-                                       <a class="btn btn-light-grey btn-xs">
+                                       <a class="btn btn-teal show-tab">
                                         <em>Aguarda Tesoreiro</em>
                                       </a>
                                      <?php }
@@ -279,7 +281,9 @@ if($head==2){
                       <td class="hidden-480"> <?php echo h($internalRequest['Department']['label']); ?> </td>
                       <td class="hidden-480"> <?php echo h($internalRequest['Beneficiary']['name']); ?> </td>
                       <td class="hidden-480"> <?php echo h($internalRequest['Provider']['name']); ?> </td>
-                      <td class="hidden-480"> <?php echo h($internalRequest['InternalRequest']['amount']); ?> </td>
+                      <td class="hidden-480"> <?php 
+                      $amount_format_number = number_format($internalRequest['InternalRequest']['amount'], 2, ',', ' ');
+                      echo $amount_format_number; ?> </td>
                       <td class="hidden-480"> <?php echo h($internalRequest['Currency']['label']); ?> </td>
                       <td><?php if (!empty($internalRequest['Report']) ) {?>
    <div class="form-group">

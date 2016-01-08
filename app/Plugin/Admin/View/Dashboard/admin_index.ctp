@@ -59,6 +59,15 @@ switch ($group_id) {
                 <div class="heading">
                   <i class="clip-clip circle-icon circle-teal"></i>
                   <h2>Head_Department</h2>
+                  <p><?php 
+                                                         if ($who == 'Head_Department') {
+                                                          if (empty($alert)) {
+                                                            echo 0;
+                                                          }else{
+                                                            echo $alert; 
+                                                          }
+                                                         } ?>
+                 </p>
                 </div>
                 <div class="content">
                   O M&oacute;dulo para a <b>Requisi&ccedil;&atilde;o de Fundo</b> permite-lhe, n&atilde;o apenas fazer sua requisi&ccedil;&otilde;es como tab&eacute;m  monitora-las, em tempo real, desde ao nivel departamental at&eacute; ao fim do ciclo de requisi&ccedil;&atilde;o a trav&eacute;s de sistema de alerta.
@@ -73,7 +82,7 @@ switch ($group_id) {
                   <h2>Forwarding Agent</h2>
                 </div>
                 <div class="content">
-                  O M&oacute;dulo para a <b>Requisi&ccedil;&atilde;o de Fundo</b> permite-lhe, n&atilde;o apenas fazer sua requisi&ccedil;&otilde;es como tab&eacute;m  amonitora-las, em tempo real, desde ao nivel departamental at&eacute; ao fim do ciclo de requisi&ccedil;&atilde;o a trav&eacute;s de sistema de alerta.
+                  O M&oacute;dulo para a <b>Requisi&ccedil;&atilde;o de Fundo</b> permite-lhe, n&atilde;o apenas fazer sua requisi&ccedil;&otilde;es como tab&eacute;m  monitora-las, em tempo real, desde ao nivel departamental at&eacute; ao fim do ciclo de requisi&ccedil;&atilde;o a trav&eacute;s de sistema de alerta.
                 </div>
                 <a class="view-more" href="#">
                   View More <i class="clip-arrow-right-2"></i>

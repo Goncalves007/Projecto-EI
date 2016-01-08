@@ -21,7 +21,7 @@ public $validate = array(
          )
     ),
     'proposal_value' => array(
-        'rule' => '/([0-9]{6,10})$/',
+        'rule' => '/([0-9]{2,8})$/',
         'message' => '(Formato valido: xxxxxx) Ex. 100000',
         'allowEmpty' => false
     ),

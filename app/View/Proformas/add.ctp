@@ -98,7 +98,7 @@
                       </div>
                       <div class="col-md-4">
 
-                      <?php echo $this->Form->end('Register',array('class' => 'btn btn-yellow btn-block')); ?>
+                      <?php echo $this->Form->end(array('label' => __d('admin', 'Register'), 'class' => 'btn btn-success')); ?>
                       </div>
                     </div>
                   </form>

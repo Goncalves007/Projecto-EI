@@ -176,58 +176,108 @@ class InternalRequestsController extends AppController {
          if($sts == 1){
           if ($request_amount < $budget) {
             $new_budget = ($budget - $request_amount);
-          }
-         }elseif($sts == 0){
-         	$new_budget = $sts;
-         }
-
-		if ($this->request->is('get')) {
+            if ($this->request->is('get')) {
         if ($new_budget) {
-	        $this->InternalRequest->read(null, $id);
-			$this->InternalRequest->set('request_status', $request_status);
-			$this->InternalRequest->save();
+          $this->InternalRequest->read(null, $id);
+      $this->InternalRequest->set('request_status', $request_status);
+      $this->InternalRequest->save();
         if ($request_status==1 || $request_status==2) {
-        	if ($request_status==1) {
-               	$text = "Foi Deferida, Pelo Chefe de Departmento, a Requisicao com a Referencia: $refReq ";
-               	$this->email($text, $correios);
+          if ($request_status==1) {
+                $text = "Foi Deferida, Pelo Chefe de Departmento, a Requisicao com a Referencia: $refReq ";
+                //$this->email($text, $correios);
                }elseif ($request_status==2) {
-               	$text = "Foi Indeferida, Pelo Chefe de Departmento, a Requisicao com Referencia: $refReq ";
-               	$this->email($text, $correios);
+                $text = "Foi Indeferida, Pelo Chefe de Departmento, a Requisicao com Referencia: $refReq ";
+                //$this->email($text, $correios);
                }
-			return $this->redirect(array('controller' => 'endorsements', 'action' => 'view',$idDep)); 	
+      return $this->redirect(array('controller' => 'endorsements', 'action' => 'view',$idDep));   
 
-			} elseif($request_status==3 || $request_status==4 || $request_status==5 || $request_status==6 || $request_status==7 || $request_status==8 || $request_status==9) {
-				if ($request_status==3) {
-	               	$text = "Foi Deferida, Pelo Gerente Financeito, a Requisicao com a Referencia: $refReq ";
-	               	$this->email($text, $correios);
-	              }elseif ($request_status==4) {
-	               	$text = "Foi Indeferida, Pelo Gerente Financeiro, a Requisicao com Referencia: $refReq ";
-	               	$this->email($text, $correios);
+      } elseif($request_status==3 || $request_status==4 || $request_status==5 || $request_status==6 || $request_status==7 || $request_status==8 || $request_status==9) {
+        if ($request_status==3) {
+                  $text = "Foi Deferida, Pelo Gerente Financeito, a Requisicao com a Referencia: $refReq ";
+                  //$this->email($text, $correios);
+                }elseif ($request_status==4) {
+                  $text = "Foi Indeferida, Pelo Gerente Financeiro, a Requisicao com Referencia: $refReq ";
+                  //$this->email($text, $correios);
                }elseif ($request_status==5) {
-               		$text = "<b>Tesoraria: </b> Ha disponibilidade de Fundo Para a Requisicao com a Referencia: $refReq ";
-	               	$this->email($text, $correios);
-	               return $this->redirect(array('controller' => 'budgets', 'action' => 'update_budget',$id_budget, $new_budget, $idDep, $id, $refReq));
+                  $text = "<b>Tesoraria: </b> Ha disponibilidade de Fundo Para a Requisicao com a Referencia: $refReq ";
+                  //$this->email($text, $correios);
+                 return $this->redirect(array('controller' => 'budgets', 'action' => 'update_budget',$id_budget, $new_budget, $idDep, $id, $refReq));
                }elseif ($request_status==6) {
-               		$text = "<b>Tesoraria: </b>Nao Ha disponibilidade de Fundo Para a Requisicao com a Referencia: $refReq ";
-	               $this->email($text, $correios);
+                  $text = "<b>Tesoraria: </b>Nao Ha disponibilidade de Fundo Para a Requisicao com a Referencia: $refReq ";
+                 //$this->email($text, $correios);
                }elseif ($request_status==7) {
-               		$text = "<b>Administracao: </b> Foi Submetida a Requisicao com a Referencia: $refReq ";
-	                $this->email($text, $correios);
+                  $text = "<b>Administracao: </b> Foi Submetida a Requisicao com a Referencia: $refReq ";
+                  //$this->email($text, $correios);
                }elseif ($request_status==8) {
-               		$text = "Por Programar";
-	               	$this->email($text, $correios);
+                  $text = "Por Programar";
+                  //$this->email($text, $correios);
                }elseif ($request_status==9) {
-               		$text = "<b>Administracao: </b> Foi Paga a Requisicao com a Referencia: $refReq ";
-	               	$this->email($text, $correios);
+                  $text = "<b>Administracao: </b> Foi Paga a Requisicao com a Referencia: $refReq ";
+                  //$this->email($text, $correios);
                }
 
-		return $this->redirect(array('controller' => 'reports', 'action' => 'all'));
-			}
-           }elseif (!$new_budget) {
-             $sms = 'Budget indisponivel para a operacao!';
+    return $this->redirect(array('controller' => 'reports', 'action' => 'all'));
+      }
+        }elseif (!$new_budget) {
+             $sms = 'Budget indisponivel para essa operacao!';
              return $this->redirect(array('controller' => 'InternalRequests', 'action' => 'view',$id,$idDep,$sms));
            }
           }
+
+          }
+         }elseif($sts == 0){
+          $new_budget = $sts ;
+           if ($this->request->is('get')) {
+        if ($new_budget) {
+          $this->InternalRequest->read(null, $id);
+      $this->InternalRequest->set('request_status', $request_status);
+      $this->InternalRequest->save();
+        if ($request_status==1 || $request_status==2) {
+          if ($request_status==1) {
+                $text = "Foi Deferida, Pelo Chefe de Departmento, a Requisicao com a Referencia: $refReq ";
+                //$this->email($text, $correios);
+               }elseif ($request_status==2) {
+                $text = "Foi Indeferida, Pelo Chefe de Departmento, a Requisicao com Referencia: $refReq ";
+                //$this->email($text, $correios);
+               }
+      return $this->redirect(array('controller' => 'endorsements', 'action' => 'view',$idDep));   
+
+      } elseif($request_status==3 || $request_status==4 || $request_status==5 || $request_status==6 || $request_status==7 || $request_status==8 || $request_status==9) {
+        if ($request_status==3) {
+                  $text = "Foi Deferida, Pelo Gerente Financeito, a Requisicao com a Referencia: $refReq ";
+                  //$this->email($text, $correios);
+                }elseif ($request_status==4) {
+                  $text = "Foi Indeferida, Pelo Gerente Financeiro, a Requisicao com Referencia: $refReq ";
+                  //$this->email($text, $correios);
+               }elseif ($request_status==5) {
+                  $text = "<b>Tesoraria: </b> Ha disponibilidade de Fundo Para a Requisicao com a Referencia: $refReq ";
+                  //$this->email($text, $correios);
+                 return $this->redirect(array('controller' => 'budgets', 'action' => 'update_budget',$id_budget, $new_budget, $idDep, $id, $refReq));
+               }elseif ($request_status==6) {
+                  $text = "<b>Tesoraria: </b>Nao Ha disponibilidade de Fundo Para a Requisicao com a Referencia: $refReq ";
+                 //$this->email($text, $correios);
+               }elseif ($request_status==7) {
+                  $text = "<b>Administracao: </b> Foi Submetida a Requisicao com a Referencia: $refReq ";
+                  //$this->email($text, $correios);
+               }elseif ($request_status==8) {
+                  $text = "Por Programar";
+                  //$this->email($text, $correios);
+               }elseif ($request_status==9) {
+                  $text = "<b>Administracao: </b> Foi Paga a Requisicao com a Referencia: $refReq ";
+                  //$this->email($text, $correios);
+               }
+
+    return $this->redirect(array('controller' => 'reports', 'action' => 'all'));
+      }
+        }elseif (!$new_budget) {
+             $sms = 'Budget indisponivel para essa operacao!';
+             return $this->redirect(array('controller' => 'InternalRequests', 'action' => 'view',$id,$idDep,$sms));
+           }
+          }
+
+         }
+
+		
 		}
 		
 	}
