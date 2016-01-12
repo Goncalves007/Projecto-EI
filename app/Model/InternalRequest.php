@@ -31,7 +31,7 @@ class InternalRequest extends AppModel {
  */
    public $validate = array(
   	'amount' => array(
-  		'rule' => '/([1-9]{2,10})$/',
+  		'rule' => '/([0-9]{2,8})$/',
         'message' => '(Formato valido: xxxxxx) Ex. 100000',
         'allowEmpty' => false
     ),
@@ -53,7 +53,7 @@ class InternalRequest extends AppModel {
     'department_id' => array(
         'rule' => '/([0-9]{1,})$/',
         'message' => 'Campo Obrigatorio',
-        'allowEmpty' => false
+        'allowEmpty' => true
     ),
     'administration_id' => array(
         'rule' => '/([0-9]{1,})$/',
@@ -63,7 +63,7 @@ class InternalRequest extends AppModel {
     'beneficiary_id' => array(
         'rule' => '/([0-9]{1,})$/',
         'message' => 'Campo Obrigatorio',
-        'allowEmpty' => false
+        'allowEmpty' => true
     ),
     'provider_id' => array(
         'rule' => '/([0-9]{1,})$/',

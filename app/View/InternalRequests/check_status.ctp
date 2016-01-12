@@ -117,8 +117,7 @@ if($head==2){
 			                          echo $this->Form->input('dataF',array('type' => 'date','label' =>false));
 			                         ?>
 			                         </label>
-			                      
-									<?php echo $this->Form->end(__('Submit')); ?>
+									<?php echo $this->Form->end(array('label' => __d('admin', 'Submit'), 'class' => 'btn btn-success')); ?>
 									</fieldset></center>
 									</div>
 
@@ -190,7 +189,11 @@ if($head==2){
                                               <?php } ?>
 						                     
 						                       <td class="hidden-480"> <?php echo $Report['InternalRequest']['created']; ?> </td>
-						                       <td> <?php echo $this->Form->hidden('hidden', array('label' => false, 'value'=>$Report['Endorso']['id'])); ?> </td>
+						                       <td> <?php echo $this->Form->hidden('hidden', array('label' => false, 'value'=>$Report['Endorso']['id'])); ?>
+                                                <?php
+                                                echo $this->Form->hidden('int', array('hiddenField' => true, 'value'=>'int'));
+                                                ?>
+						                        </td>
 						                       
 						                        <td> <?php echo $this->Form->hidden('Pay', array('label' => false, 'value'=>1)); ?> </td>
 
@@ -278,11 +281,15 @@ if($head==2){
                                               
 						                      
 						                       <td class="hidden-480"> <?php echo $Report['InternalRequest']['created']; ?> </td>
-						                       <td> <?php echo $this->Form->hidden('hidden', array('label' => false, 'value'=>$Report['Endorso']['id'])); ?> </td>
+						                       <td> <?php echo $this->Form->hidden('hidden', array('label' => false, 'value'=>$Report['Endorso']['id'])); ?>
+                                                    <?php
+                                                echo $this->Form->hidden('int', array('hiddenField' => true, 'value'=>'int'));
+                                                ?>
+						                        </td>
 						                       
 						                        <td> <?php echo $this->Form->hidden('Pay', array('label' => false, 'value'=>1)); ?> </td>
                                                 <td><?php echo $this->Form->end('Edit',array('class' => 'btn btn-yellow btn-block')); ?> </td>
-						                        <td><?php echo $this->Html->link('View Details', array('controller' =>'internalRequests', 'action' => 'view', $Report['Endorso']['request_id']));?></td>
+						                        <td><?php echo $this->Html->link('View Details', array('controller' =>'internalRequests', 'action' => 'view', $Report['Endorso']['request_id']),array('class' => 'btn btn-light-grey btn-xs'));?></td>
 						                    </tr>
 						                    <?php } ?>
 
@@ -399,7 +406,11 @@ if($head==2){
                                               <?php } ?>
 						                      
 						                       <td class="hidden-480"> <?php echo $Report['InternalRequest']['created']; ?> </td>
-						                       <td> <?php echo $this->Form->hidden('hidden', array('label' => false, 'value'=>$Report['Endorso']['id'])); ?> </td>
+						                       <td> <?php echo $this->Form->hidden('hidden', array('label' => false, 'value'=>$Report['Endorso']['id'])); ?>
+                                                   <?php
+                                                echo $this->Form->hidden('int', array('hiddenField' => true, 'value'=>'int'));
+                                                ?>
+						                        </td>
 						                       
 						                        <td> <?php echo $this->Form->hidden('Justify', array('label' => false, 'value'=>1)); ?> </td>
 
@@ -487,11 +498,15 @@ if($head==2){
 
                                               
 						                       <td class="hidden-480"> <?php echo $Report['InternalRequest']['created']; ?> </td>
-						                       <td> <?php echo $this->Form->hidden('hidden', array('label' => false, 'value'=>$Report['Endorso']['id'])); ?> </td>
+						                       <td> <?php echo $this->Form->hidden('hidden', array('label' => false, 'value'=>$Report['Endorso']['id'])); ?>
+                                                    <?php
+                                                echo $this->Form->hidden('int', array('hiddenField' => true, 'value'=>'int'));
+                                                ?>
+						                        </td>
 						                       
 						                        <td> <?php echo $this->Form->hidden('Justify', array('label' => false, 'value'=>1)); ?> </td>
                                                 <td><?php echo $this->Form->end('Edit',array('class' => 'btn btn-yellow btn-block')); ?> </td>
-						                        <td><?php echo $this->Html->link('View Details', array('controller' =>'internalRequests', 'action' => 'view', $Report['Endorso']['request_id']));?></td>
+						                        <td><?php echo $this->Html->link('View Details', array('controller' =>'internalRequests', 'action' => 'view', $Report['Endorso']['request_id']),array('class' => 'btn btn-light-grey btn-xs'));?></td>
 
 						                    </tr>
 						                    <?php } ?>
@@ -571,12 +586,14 @@ if($head==2){
 
                                               
 						                       <td class="hidden-480"> <?php echo $Report['InternalRequest']['created']; ?> </td>
-						                       <td> <?php echo $this->Form->hidden('hidden', array('label' => false, 'value'=>$Report['Endorso']['id'])); ?> </td>
-						                       
+						                       <td> <?php echo $this->Form->hidden('hidden', array('label' => false, 'value'=>$Report['Endorso']['id'])); ?>
+                                                <?php
+                                                echo $this->Form->hidden('int', array('hiddenField' => true, 'value'=>'int'));
+                                                ?>
+						                        </td>
 						                        <td> <?php echo $this->Form->hidden('Justify', array('label' => false, 'value'=>1)); ?> </td>
                                                 <td><?php echo $this->Form->end('Edit',array('class' => 'btn btn-yellow btn-block')); ?> </td>
-						                        <td><?php echo $this->Html->link('View Details', array('controller' =>'internalRequests', 'action' => 'view', $Report['Endorso']['request_id']));?></td>
-
+						                        <td><?php echo $this->Html->link('View Details', array('controller' =>'internalRequests', 'action' => 'view', $Report['Endorso']['request_id'],$Report['InternalRequest']['department_id']),array('class' => 'btn btn-light-grey btn-xs'));?></td>
 						                    </tr>
 						                    <?php } ?>
 
@@ -661,7 +678,7 @@ if($head==2){
 						                       
 						                        <td> <?php echo $this->Form->hidden('Justify', array('label' => false, 'value'=>1)); ?> </td>
                                                 <td><?php echo $this->Form->end('Edit',array('class' => 'btn btn-yellow btn-block')); ?> </td>
-						                        <td><?php echo $this->Html->link('View Details', array('controller' =>'internalRequests', 'action' => 'view', $Report['Endorso']['request_id']));?></td>
+						                        <td><?php echo $this->Html->link('View Details', array('controller' =>'internalRequests', 'action' => 'view', $Report['Endorso']['request_id']),array('class' => 'btn btn-light-grey btn-xs'));?></td>
 
 						                    </tr>
 						                    <?php } ?>

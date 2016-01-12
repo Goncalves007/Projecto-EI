@@ -53,7 +53,7 @@ class ExternalRequest extends AppModel {
     'department_id' => array(
         'rule' => '/([0-9]{1,})$/',
         'message' => 'Campo Obrigatorio',
-        'allowEmpty' => false
+        'allowEmpty' => true
     ),
     'administration_id' => array(
         'rule' => '/([0-9]{1,})$/',
@@ -63,7 +63,7 @@ class ExternalRequest extends AppModel {
     'external_beneficiary_id' => array(
         'rule' => '/([0-9]{1,})$/',
         'message' => 'Campo Obrigatorio',
-        'allowEmpty' => false
+        'allowEmpty' => true
     ),
     'provider_id' => array(
         'rule' => '/([0-9]{1,})$/',

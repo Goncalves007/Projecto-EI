@@ -42,6 +42,8 @@ class EndorsosController extends AppController {
 			}
 	}elseif ($this->request->is('post')) {
 		$id = $this->request->data['Endorso']['hidden'];
+		$int = $this->request->data['Endorso']['int'];
+		//$ext = $this->request->data['Endorso']['ext'];
 	     if($this->Endorso->read(null, $id)){
 	     	if (!empty($this->request->data['Endorso']['guia']) || !empty($this->request->data['Endorso']['factura'])) {
 	     		$this->Endorso->set('guia_entrega',$this->request->data['Endorso']['guia']);
@@ -53,7 +55,12 @@ class EndorsosController extends AppController {
 			    }
 
             if ($this->Endorso->save($this->request->data)) {
-			return $this->redirect(array('controller' => 'externalRequests', 'action' => 'check_status'));
+            if ($int == "int") {
+            	$Controller = 'internalRequests';
+            }else{
+            	$Controller = 'externalRequests';
+            }
+			return $this->redirect(array('controller' =>$Controller, 'action' => 'check_status'));
 			 //return $this->redirect(array('controller' => 'reports', 'action' => 'all'));
 			}
 

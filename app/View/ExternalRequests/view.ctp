@@ -12,23 +12,27 @@ if($head==2){
       echo $this->element('nav_menu_Department');
     }
 ?>
-
 <!-- start: PAGE CONTENT -->
           <div class="invoice">
             <div class="row invoice-logo">
               <div class="col-sm-6">
-              <?php //echo debug($var) ?>
+              <?php
+              //echo debug($Budgets);
+              
+              ?>
               </div>
               <div class="col-sm-6">
                 <p>
-                  <?php echo __($externalRequest['ExternalRequest']['reference_application']); ?><span> <?php echo h($externalRequest['ExternalRequest']['created']); ?> </span>
+                  <?php echo __($externalRequest['ExternalRequest']['reference_application']); ?>
+                  <span> <?php echo __($externalRequest['ExternalRequest']['created']); ?> </span>
                 </p>
                 <strong> Payment details : </strong><span style="color:#606060"><em><?php echo h($externalRequest['ExternalRequest']['payment_details']); ?></em></span>
               </div>
+              
             </div>
             <hr>
             <div class="row">
-            <div class="col-sm-4">
+              <div class="col-sm-4">
                 <h4>Pro-Forma Details:</h4>
                 <div class="well">
                   <address>
@@ -76,8 +80,7 @@ if($head==2){
                   </address>
                 </div>
               </div>
-              
-               <div class="col-sm-4 pull-right">
+              <div class="col-sm-4 pull-right">
                
                 <?php if (($head!=2 && $head!=3)) { ?>
                       <div class="tabbable tabs-left">
@@ -86,7 +89,7 @@ if($head==2){
                         </div>
                         <div class="panel-body">
                             <ul class="nav nav-tabs">
-                              <?php if($head == 6 || $head == 8 || $head==7){  ?>
+                              <?php if($head == 6 || $head == 8 || $head == 7){  ?>
                                 <li class="active"><a href="#home" data-toggle="tab">Available Budget</a>
                                 </li>
                               <?php } ?>
@@ -95,7 +98,7 @@ if($head==2){
                             </ul>
 
                             <div class="tab-content">
-                            <?php if($head == 6 || $head == 8 || $head==7){  ?>
+                            <?php if($head == 6 || $head == 8 || $head == 7){  ?>
                                <div class="tab-pane fade in active" id="home">
                                <?php foreach ($Budgets as $budget): ?>
                                     <h4>Available Budget</h4>
@@ -151,26 +154,17 @@ if($head==2){
                                        <div class="form-group">
                                         <?php echo $this->Html->link('Accept Request', array('action' => 'Endorsement',$externalRequest['ExternalRequest']['id'],1,$externalRequest['ExternalRequest']['department_id'],$externalRequest['ExternalRequest']['reference_application'],$Budgets[0]['Budget']['id'],$Budgets[0]['Budget']['budget'],$externalRequest['ExternalRequest']['amount'],1,$externalRequest['User']['email']),array('class' => 'btn btn-default'));?>
                                         </div>
-                                       <?php }elseif ($externalRequest['ExternalRequest']['request_status'] ==1) { ?><a class="btn btn-light-grey btn-xs"> 
+                                       <?php }elseif ($externalRequest['ExternalRequest']['request_status'] ==1) { ?> 
                                        <em>Aguardando o Ger. Financeiro ...</em>
                                       <?php }elseif ($externalRequest['ExternalRequest']['request_status'] ==5) { ?>
-                                      <a class="btn btn-teal show-tab">
                                        <em>Aguarda Por Submissao</em>
-                                       </a>
                                       <?php }elseif ($externalRequest['ExternalRequest']['request_status'] ==7) { ?>
-                                      <a class="btn btn-teal show-tab">
                                        <em>Aguarda Pagamento</em>
-                                       </a>
                                       <?php }elseif ($externalRequest['ExternalRequest']['request_status'] ==9) { ?>
                                         <a class="btn btn-teal show-tab">
                                         <em>Requisicao Paga</em>
                                       </a>
-                                      <?php }elseif ($externalRequest['ExternalRequest']['request_status'] ==3) { ?>
-                                       <a class="btn btn-teal show-tab">
-                                        <em>Aguarda Tesoreiro</em>
-                                      </a>
-                                     <?php }
-                                      else{ ?>
+                                      <?php }else{ ?>
                                       <a class="btn btn-red show-tab">
                                        <em>Requisicao Indiferida</em>
                                       </a>
@@ -181,17 +175,11 @@ if($head==2){
                                         <?php echo $this->Html->link('Accept Request', array('action' => 'Endorsement',$externalRequest['ExternalRequest']['id'],3,$externalRequest['ExternalRequest']['department_id'],$externalRequest['ExternalRequest']['reference_application'],$Budgets[0]['Budget']['id'],$Budgets[0]['Budget']['budget'],$externalRequest['ExternalRequest']['amount'],1,$externalRequest['User']['email']),array('class' => 'btn btn-default'));?>
                                         </div>
                                       <?php }elseif ($externalRequest['ExternalRequest']['request_status'] ==0) { ?> 
-                                      <a class="btn btn-light-grey btn-xs">
                                        <em>Aguardando Ch. Departamento ...</em>
-                                       </a>
                                       <?php }elseif ($externalRequest['ExternalRequest']['request_status'] ==5) { ?>
-                                      <a class="btn btn-teal show-tab">
                                        <em>Aguarda Por Submissao</em>
-                                       </a>
                                       <?php }elseif ($externalRequest['ExternalRequest']['request_status'] ==7) { ?>
-                                      <a class="btn btn-teal show-tab">
                                        <em>Aguarda Pagamento</em>
-                                       </a>
                                       <?php }elseif ($externalRequest['ExternalRequest']['request_status'] ==9) { ?>
                                         <a class="btn btn-teal show-tab">
                                         <em>Requisicao Paga</em>
@@ -212,30 +200,18 @@ if($head==2){
                                         <?php echo $this->Html->link('Resource available', array('action' => 'Endorsement',$externalRequest['ExternalRequest']['id'],5,$externalRequest['ExternalRequest']['department_id'],$externalRequest['ExternalRequest']['reference_application'],$Budgets[0]['Budget']['id'],$Budgets[0]['Budget']['budget'],$externalRequest['ExternalRequest']['amount'],1,$externalRequest['User']['email']),array('class' => 'btn btn-default'));?>
                                         </div>
                                       <?php }elseif ($externalRequest['ExternalRequest']['request_status'] ==0) { ?>
-                                      <a class="btn btn-light-grey btn-xs">
                                         <em>Aguardando o Chef. Departamento ...</em>
-                                        </a>
                                       <?php }elseif ($externalRequest['ExternalRequest']['request_status'] ==1) { ?> 
-                                      <a class="btn btn-light-grey btn-xs">
                                        <em>Aguardando o Ger. Financeiro ...</em>
-                                       </a>
                                       <?php }elseif ($externalRequest['ExternalRequest']['request_status'] ==5) { ?>
-                                      <a class="btn btn-teal show-tab">
                                        <em>Aguarda Por Submissao</em>
-                                       </a>
                                       <?php }elseif ($externalRequest['ExternalRequest']['request_status'] ==7) { ?>
-                                      <a class="btn btn-teal show-tab">
                                        <em>Aguarda Pagamento</em>
-                                       </a>
                                       <?php }elseif ($externalRequest['ExternalRequest']['request_status'] ==9) { ?>
                                         <a class="btn btn-teal show-tab">
                                         <em>Requisicao Paga</em>
                                       </a>
-                                      <?php }elseif ($externalRequest['ExternalRequest']['request_status'] ==3) {?>
-                                       <a class="btn btn-teal show-tab">
-                                        <em>Aguarda Tesoreiro</em>
-                                      </a>
-                                    <?php }else{ ?>
+                                      <?php }else{ ?>
                                       <a class="btn btn-red show-tab">
                                        <em>Requisicao Indiferida</em>
                                       </a>
@@ -250,21 +226,13 @@ if($head==2){
                                         <?php echo $this->Html->link('Pay Request', array('action' => 'Endorsement',$externalRequest['ExternalRequest']['id'],9,$externalRequest['ExternalRequest']['department_id'],$externalRequest['ExternalRequest']['reference_application'],$Budgets[0]['Budget']['id'],$Budgets[0]['Budget']['budget'],$externalRequest['ExternalRequest']['amount'],1,$externalRequest['User']['email']),array('class' => 'btn btn-default'));?>
                                         </div>
                                       <?php }elseif ($externalRequest['ExternalRequest']['request_status'] ==0) { ?>
-                                      <a class="btn btn-light-grey btn-xs">
                                         <em>Aguardando o Chef. Departamento ...</em>
-                                        </a>
                                       <?php }elseif ($externalRequest['ExternalRequest']['request_status'] ==1) { ?>
-                                      <a class="btn btn-light-grey btn-xs">
                                        <em>Aguardando o Ger. Financeiro ...</em>
-                                       </a>
                                       <?php }elseif ($externalRequest['ExternalRequest']['request_status'] ==3) { ?>
-                                      <a class="btn btn-light-grey btn-xs">
                                         <em>Aguardando a Tesoraria ...</em>
-                                        </a>
                                       <?php }elseif ($externalRequest['ExternalRequest']['request_status'] ==7) { ?>
-                                      <a class="btn btn-teal show-tab">
                                        <em>Aguarda Pagamento</em>
-                                       </a>
                                       <?php }elseif ($externalRequest['ExternalRequest']['request_status'] ==9) { ?>
                                       <a class="btn btn-teal show-tab">
                                         <em>Requisicao Paga</em>
@@ -314,7 +282,7 @@ if($head==2){
                       <th class="hidden-480"> Provider </th>
                       <th class="hidden-480"> Amount </th>
                       <th class="hidden-480"> Currency </th>
-                      <th class="hidden-480"> File</th>
+                      <th class="hidden-480"> File </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -344,3 +312,4 @@ if($head==2){
            
           </div>
           <!-- end: PAGE CONTENT-->
+          <?php echo debug($externalRequest) ?>
