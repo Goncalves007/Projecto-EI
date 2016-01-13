@@ -126,6 +126,13 @@ if($head==2){
 							</div>
 							<!-- end: CHECKBOXES PANEL -->
 						</div>
+			                        <?php
+                                         if (isset($sms)) {
+                                           echo "<em style='color:red'>$sms</em>";
+                                         }else{
+                                          $sms="";
+                                         }
+                                     ?>			
 									<!-- end: TEXT AREA PANEL -->
           <?php if (isset($Reports) && !empty($Reports) && $Label == 'P' ) {?>
           	
@@ -162,8 +169,8 @@ if($head==2){
 						                      <th class="hidden-480"> Delivery note N. </th>
 						                      <th class="hidden-480"> Invoice N. </th>
 						                      <th class="hidden-480"> Proposal value </th>
-						                      <th class="hidden-480"> created </th>
-						                      <th class="hidden-480"></th>
+						                      <th class="hidden-480"> Created </th>
+						                      <th class="hidden-480"> Status </th>
 						                      <th class="hidden-480"></th>
 						                      <th class="hidden-480"> Action</th>
 						                    </tr>
@@ -195,12 +202,25 @@ if($head==2){
                                             <?php $sum_total[] = $p; ?>
                                            <?php }} ?>
 						                       <td class="hidden-480"> <?php echo $Report['ExternalRequest']['created']; ?> </td>
+						                       <?php
+                                                  if (empty($Report['Endorso']['justificada'])) {?>
+                                                     <td><a class='btn btn-light-red btn-xs'>
+                                                                Nao Justificada
+                                                           </a></td>
+                                                     <?php }else{ echo "<td></td>";} ?>
 						                       <td> <?php echo $this->Form->hidden('hidden', array('label' => false, 'value'=>$Report['Endorso']['id'])); ?> </td>
 						                       
 						                        <td> <?php echo $this->Form->hidden('Pay', array('label' => false, 'value'=>1)); ?> </td>
-
-						                        
-                                              <td><?php echo $this->Form->end('Paid',array('class' => 'btn btn-yellow btn-block')); ?></td>
+						                        <td>
+						                        <?php 
+                                                    if (empty($Report['Endorso']['guia_entrega']) || empty($Report['Endorso']['n_factura']) || empty($Report['Endorso']['justificada'])) {
+                                                     $block = "<a class='btn btn-light-grey btn-xs'>
+                                                                Paid
+                                                           </a>";
+                                                     echo "$block";
+                                                     }elseif (!empty($Report['Endorso']['guia_entrega']) && !empty($Report['Endorso']['n_factura'])) {?>
+                                                    	<?php echo $this->Form->end('Paid',array('class' => 'btn btn-yellow btn-block')); ?></td>
+                                                   <?php }  ?>
 						                    </tr>
 						                    <?php } ?>
 
@@ -217,7 +237,16 @@ if($head==2){
 						                    	<td class="hidden-480"><br>Total</br></td>
 						                    	<td></td>
 						                    	<td></td>
-						                    	<td><br><?php echo number_format($sum, 2, ',', '.'); ?></br></td>
+						                    	<td>
+						                    	<br><?php echo number_format($sum, 2, ',', '.'); ?>
+						                    	</td>
+						                    	<td></td>
+						                    	<?php
+						                    	if ($block) {?>
+						                    	<td>*Payment locked - <em style='color:red'>Dados Incompleto para o pagamento</em>
+						                    	</td>
+						                    	<?php } ?>
+						                    	
 						                    </tr>
 						                  </tbody>
 						                </table>
@@ -230,7 +259,7 @@ if($head==2){
 						   </div>
 						</div>
 
-          <?php }?>
+          <?php } //debug($Report);?>
 
 <?php if (isset($Reports) && !empty($Reports) && $Label == 'Tp' ) {?>
           	
@@ -306,7 +335,14 @@ if($head==2){
 						                       <td> <?php echo $this->Form->hidden('hidden', array('label' => false, 'value'=>$Report['Endorso']['id'])); ?> </td>
 						                       
 						                        <td> <?php echo $this->Form->hidden('Pay', array('label' => false, 'value'=>1)); ?> </td>
-                                                <td><?php echo $this->Form->end('Edit',array('class' => 'btn btn-yellow btn-block')); ?> | <?php echo $this->Html->link('View Details', array('controller' =>'externalRequests', 'action' => 'view', $Report['Endorso']['request_id']),array('class' => 'btn btn-light-grey btn-xs'));?></td>
+						                        <?php
+                                                   if ($Report['Endorso']['paga'] == 1) {?>
+                                                   <td><a class="btn btn-light-grey btn-xs">
+                                                    <em>Edit</em></a></td>
+                                                   <?php }else{?>
+                                                     <td><?php echo $this->Form->end('Edit',array('class' => 'btn btn-yellow btn-block')); ?></td>
+                                                   <?php } ?>
+                                                <td><?php echo $this->Html->link('View Details', array('controller' =>'externalRequests', 'action' => 'view', $Report['Endorso']['request_id']),array('class' => 'btn btn-light-grey btn-xs'));?></td>
 						                        
 						                    </tr>
 						                    <?php } ?>
@@ -553,10 +589,17 @@ if($head==2){
                                            <?php }} ?>
 						                      
 						                       <td class="hidden-480"> <?php echo $Report['ExternalRequest']['created']; ?> </td>
+
 						                       <td> <?php echo $this->Form->hidden('hidden', array('label' => false, 'value'=>$Report['Endorso']['id'])); ?> </td>
 						                       
 						                        <td> <?php echo $this->Form->hidden('Justify', array('label' => false, 'value'=>1)); ?> </td>
-                                                <td><?php echo $this->Form->end('Edit',array('class' => 'btn btn-yellow btn-block')); ?> </td>
+                                                <?php
+                                                   if ($Report['Endorso']['paga'] == 1) {?>
+                                                   <td><a class="btn btn-light-grey btn-xs">
+                                                    <em>Edit</em></a></td>
+                                                   <?php }else{?>
+                                                     <td><?php echo $this->Form->end('Edit',array('class' => 'btn btn-yellow btn-block')); ?></td>
+                                                   <?php } ?>
 						                        <td><?php echo $this->Html->link('View Details', array('controller' =>'externalRequests', 'action' => 'view', $Report['Endorso']['request_id']),array('class' => 'btn btn-light-grey btn-xs'));?></td>
 
 						                    </tr>
@@ -594,7 +637,7 @@ if($head==2){
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<i class="fa fa-external-link-square"></i>
-									Todas Requisicoes
+									Todas Requisicoes Pagas e Justificadas
 									<div class="panel-tools">
 										<a class="btn btn-xs btn-link panel-collapse collapses" href="#">
 										</a>
@@ -662,7 +705,13 @@ if($head==2){
 						                       <td> <?php echo $this->Form->hidden('hidden', array('label' => false, 'value'=>$Report['Endorso']['id'])); ?> </td>
 						                       
 						                        <td> <?php echo $this->Form->hidden('Justify', array('label' => false, 'value'=>1)); ?> </td>
-                                                <td><?php echo $this->Form->end('Edit',array('class' => 'btn btn-yellow btn-block')); ?> </td>
+                                                <?php
+                                                   if ($Report['Endorso']['paga'] == 1) {?>
+                                                   <td><a class="btn btn-light-grey btn-xs">
+                                                    <em>Edit</em></a></td>
+                                                   <?php }else{?>
+                                                     <td><?php echo $this->Form->end('Edit',array('class' => 'btn btn-yellow btn-block')); ?></td>
+                                                   <?php } ?>
 						                        <td><?php echo $this->Html->link('View Details', array('controller' =>'externalRequests', 'action' => 'view', $Report['Endorso']['request_id'],$Report['ExternalRequest']['department_id']),array('class' => 'btn btn-light-grey btn-xs')); ?></td>
 
 						                    </tr>
@@ -768,7 +817,14 @@ if($head==2){
 						                       <td> <?php echo $this->Form->hidden('hidden', array('label' => false, 'value'=>$Report['Endorso']['id'])); ?> </td>
 						                       
 						                        <td> <?php echo $this->Form->hidden('Justify', array('label' => false, 'value'=>1)); ?> </td>
-                                                <td><?php echo $this->Form->end('Edit',array('class' => 'btn btn-yellow btn-block')); ?> | 
+                                                <?php
+                                                   if ($Report['Endorso']['paga'] == 1) {?>
+                                                   <td><a class="btn btn-light-grey btn-xs">
+                                                    <em>Edit</em></a></td>
+                                                   <?php }else{?>
+                                                     <td><?php echo $this->Form->end('Edit',array('class' => 'btn btn-yellow btn-block')); ?></td>
+                                                   <?php } ?>
+                                                <td> 
 						                        <?php echo $this->Html->link('View Details', array('controller' =>'externalRequests', 'action' => 'view', $Report['Endorso']['request_id']),array('class' => 'btn btn-light-grey btn-xs'));?></td>
 
 						                    </tr>

@@ -69,6 +69,13 @@ class EndorsosController extends AppController {
 			$this->Endorso->set('justificada',0);
 			$this->Endorso->set('guia_entrega',0);
 			$this->Endorso->set('n_factura',0);
+			if ($int == "int") {
+            	$Controller = 'internalRequests';
+            }else{
+            	$Controller = 'externalRequests';
+            }
+			$sms = "Operacao nao foi executada, Campos Vasios";
+             return $this->redirect(array('controller' =>'externalRequests', 'action' => 'check_status',$sms));
             }
 			if ($this->Endorso->save($this->request->data)) {
 				//$this->Session->setFlash(__('The external request has been saved.'));

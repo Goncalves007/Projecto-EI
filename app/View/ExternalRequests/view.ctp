@@ -222,9 +222,16 @@ if($head==2){
                                         <?php echo $this->Html->link('Submit Request', array('action' => 'Endorsement',$externalRequest['ExternalRequest']['id'],7,$externalRequest['ExternalRequest']['department_id'],$externalRequest['ExternalRequest']['reference_application'],$Budgets[0]['Budget']['id'],$Budgets[0]['Budget']['budget'],$externalRequest['ExternalRequest']['amount'],1,$externalRequest['User']['email']),array('class' => 'btn btn-default'));?>
                                         </div>
                                         <?php }elseif ($externalRequest['ExternalRequest']['request_status'] ==7) {?>
-                                       <div class="form-group">
+                                        <?php if (empty($externalRequest['Endorso'][0]['guia_entrega']) || empty($externalRequest['Endorso'][0]['n_factura']) || empty($externalRequest['Endorso'][0]['justificada'])){
+                                          echo "<em>Dados incompletos para o pagamento;</em><br><br><strong>".
+                                           $this->Html->link('Completar', array('action' =>'check_status'),array('class' => 'btn btn-light-grey btn-xs'))
+                                           ."</strong>";
+                                          }else{?>
+                                         <div class="form-group">
                                         <?php echo $this->Html->link('Pay Request', array('action' => 'Endorsement',$externalRequest['ExternalRequest']['id'],9,$externalRequest['ExternalRequest']['department_id'],$externalRequest['ExternalRequest']['reference_application'],$Budgets[0]['Budget']['id'],$Budgets[0]['Budget']['budget'],$externalRequest['ExternalRequest']['amount'],1,$externalRequest['User']['email']),array('class' => 'btn btn-default'));?>
                                         </div>
+                                         <?php } ?>
+                                       
                                       <?php }elseif ($externalRequest['ExternalRequest']['request_status'] ==0) { ?>
                                         <em>Aguardando o Chef. Departamento ...</em>
                                       <?php }elseif ($externalRequest['ExternalRequest']['request_status'] ==1) { ?>

@@ -47,7 +47,7 @@ class ExternalRequestsController extends AppController {
   }
 
 
-  public function check_status(){
+  public function check_status($sms = null){
 
     if ($this->request->is('post')) {
     if (isset($this->request->data['Search']['search']) && !empty($this->request->data['Search']['search'])) {
@@ -309,6 +309,7 @@ $this->set('status',$status);
 $this->set('pro',$pro);
 $this->set('dep',$dep);
 $this->set('ext',$ext);
+$this->set('sms',$sms);
 //$this->set('teste',$teste);
 //$this->set('start',$start);
 //$this->set('end',$end);
